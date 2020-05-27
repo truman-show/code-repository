@@ -31,8 +31,15 @@ public class LiteralExample {
     System.out.println("이것은" + '\"' + "중요" + "\"" + "합니다");
     System.out.println("가격이 \\ 300 입니다");
 
-
-    char var8 = '\u0041'; //16진수  : 4 * 16 + 1 * 16 = 64 + 1
+    char var8 = '\u0041'; //16진수  : 4 * 16의 1승 + 1 * 16의 0승 = 64 + 1
     System.out.println(var8);
+
+    String var9 = "자바";
+    System.out.println(var9);
+
+    boolean var10 = true;
+    boolean var11 = false;
+    System.out.println(var10);
+    System.out.println(var11);
   }
 }
