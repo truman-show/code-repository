@@ -1,0 +1,7 @@
+jihoon:
+  name: jihoon
+  age: ${random.int(0,100)}
+  fullName: ${jihoon.name} lee
+
+#server.port=0
+  #server.port를 랜덤으로 주고싶다면 0 을 사용하라
