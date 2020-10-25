@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import springbook.user.domain.User;
 
 public class UserDao {
@@ -58,8 +60,11 @@ class UserDaoTest {
   //테스트용 main()메소드
   public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-    DaoFactory daoFactory = new DaoFactory();
-    UserDao dao = daoFactory.userDao();
+//    DaoFactory daoFactory = new DaoFactory();
+//    UserDao dao = daoFactory.userDao();
+
+    ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+    UserDao dao = context.getBean("userDao", UserDao.class);
 
     User user = new User();
     user.setId("truman-show");
