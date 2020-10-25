@@ -10,9 +10,7 @@ import springbook.user.domain.User;
 public class UserDao {
 
   public void add(User user) throws ClassNotFoundException, SQLException {
-    Class.forName("org.h2.Driver");
-    Connection connection = DriverManager
-        .getConnection("jdbc:h2:tcp://localhost/~/springbook", "sa", "");
+    Connection connection = getConnection();
 
     PreparedStatement preparedStatement = connection.prepareStatement(
         "insert into users(id, name, password) values (?, ?, ?)");
@@ -26,11 +24,8 @@ public class UserDao {
 
   }
 
-
   public User get(String id) throws ClassNotFoundException, SQLException {
-    Class.forName("org.h2.Driver");
-    Connection connection = DriverManager
-        .getConnection("jdbc:h2:tcp://localhost/~/springbook", "sa", "");
+    Connection connection = getConnection();
 
     PreparedStatement preparedStatement = connection.prepareStatement(
         "select * from users where id = ?");
@@ -49,6 +44,12 @@ public class UserDao {
     connection.close();
 
     return user;
+  }
+
+  private Connection getConnection() throws ClassNotFoundException, SQLException {
+    Class.forName("org.h2.Driver");
+    return DriverManager
+        .getConnection("jdbc:h2:tcp://localhost/~/springbook", "sa", "");
   }
 
   //테스트용 main()메소드
