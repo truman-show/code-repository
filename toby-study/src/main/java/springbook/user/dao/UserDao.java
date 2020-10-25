@@ -1,7 +1,6 @@
 package springbook.user.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,10 +8,14 @@ import springbook.user.domain.User;
 
 public class UserDao {
 
+  private SimpleConnectionMaker simpleConnectionMaker;
+
+  public UserDao() {
+    this.simpleConnectionMaker = new SimpleConnectionMaker();
+  }
+
   public void add(User user) throws ClassNotFoundException, SQLException {
-    Class.forName("org.h2.Driver");
-    Connection connection = DriverManager
-        .getConnection("jdbc:h2:tcp://localhost/~/springbook", "sa", "");
+    Connection connection = simpleConnectionMaker.makeNewConnection();
 
     PreparedStatement preparedStatement = connection.prepareStatement(
         "insert into users(id, name, password) values (?, ?, ?)");
@@ -26,11 +29,8 @@ public class UserDao {
 
   }
 
-
   public User get(String id) throws ClassNotFoundException, SQLException {
-    Class.forName("org.h2.Driver");
-    Connection connection = DriverManager
-        .getConnection("jdbc:h2:tcp://localhost/~/springbook", "sa", "");
+    Connection connection = simpleConnectionMaker.makeNewConnection();
 
     PreparedStatement preparedStatement = connection.prepareStatement(
         "select * from users where id = ?");
@@ -56,7 +56,7 @@ public class UserDao {
     UserDao dao = new UserDao();
 
     User user = new User();
-    user.setId("truman-show2");
+    user.setId("truman-show");
     user.setName("이지훈");
     user.setPassword("1234");
 
