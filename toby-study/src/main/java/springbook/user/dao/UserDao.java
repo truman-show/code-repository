@@ -51,6 +51,10 @@ public class UserDao {
     return user;
   }
 
+}
+
+class UserDaoTest {
+
   //테스트용 main()메소드
   public static void main(String[] args) throws SQLException, ClassNotFoundException {
     UserDao dao = new UserDao();
