@@ -8,11 +8,22 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
 dependencies {
 
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+
+    implementation group: 'net.sourceforge.cglib', name: 'com.springsource.net.sf.cglib', version: '2.2.0'
+    implementation group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
+    implementation group: 'org.springframework', name: 'spring-asm', version: '3.0.7.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-beans', version: '3.0.7.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-context', version: '3.0.7.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-core', version: '3.0.7.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-expression', version: '3.0.7.RELEASE'
+
+
     testCompileOnly group: 'junit', name: 'junit', version: '4.12'
 }
