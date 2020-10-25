@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import springbook.user.domain.User;
 
-public class UserDao {
+public abstract class UserDao {
 
   public void add(User user) throws ClassNotFoundException, SQLException {
     Connection connection = getConnection();
@@ -46,18 +46,35 @@ public class UserDao {
     return user;
   }
 
-  private Connection getConnection() throws ClassNotFoundException, SQLException {
-    Class.forName("org.h2.Driver");
-    return DriverManager
-        .getConnection("jdbc:h2:tcp://localhost/~/springbook", "sa", "");
+  protected abstract Connection getConnection() throws ClassNotFoundException, SQLException;
+
+
+  public static class NUserDao extends UserDao {
+
+    @Override
+    protected Connection getConnection() throws ClassNotFoundException, SQLException {
+      Class.forName("org.h2.Driver");
+      return DriverManager
+          .getConnection("jdbc:h2:tcp://localhost/~/springbook", "sa", "");
+    }
+  }
+
+  public static class DUserDao extends UserDao {
+
+    @Override
+    protected Connection getConnection() throws ClassNotFoundException, SQLException {
+      Class.forName("org.h2.Driver");
+      return DriverManager
+          .getConnection("jdbc:h2:tcp://localhost/~/springbook", "sa", "");
+    }
   }
 
   //테스트용 main()메소드
   public static void main(String[] args) throws SQLException, ClassNotFoundException {
-    UserDao dao = new UserDao();
+    UserDao dao = new NUserDao();
 
     User user = new User();
-    user.setId("truman-show2");
+    user.setId("truman-show");
     user.setName("이지훈");
     user.setPassword("1234");
 
