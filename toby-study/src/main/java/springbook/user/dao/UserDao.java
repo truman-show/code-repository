@@ -10,8 +10,8 @@ public class UserDao {
 
   private ConnectionMaker connectionMaker;
 
-  public UserDao() {
-    this.connectionMaker = new NConnectionMaker();
+  public UserDao(ConnectionMaker connectionMaker) {
+    this.connectionMaker = connectionMaker;
   }
 
   public void add(User user) throws ClassNotFoundException, SQLException {
@@ -57,7 +57,7 @@ class UserDaoTest {
 
   //테스트용 main()메소드
   public static void main(String[] args) throws SQLException, ClassNotFoundException {
-    UserDao dao = new UserDao();
+    UserDao dao = new UserDao(new NConnectionMaker());
 
     User user = new User();
     user.setId("truman-show");
