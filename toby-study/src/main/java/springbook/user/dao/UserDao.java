@@ -4,20 +4,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.sql.DataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import springbook.user.domain.User;
 
 public class UserDao {
 
-  private ConnectionMaker connectionMaker;
+  private DataSource datasource;
 
-  public UserDao(ConnectionMaker connectionMaker) {
-    this.connectionMaker = connectionMaker;
+  public UserDao(DataSource datasource) {
+    this.datasource = datasource;
   }
 
   public void add(User user) throws ClassNotFoundException, SQLException {
-    Connection connection = connectionMaker.makeConnection();
+    Connection connection = datasource.getConnection();
 
     PreparedStatement preparedStatement = connection.prepareStatement(
         "insert into users(id, name, password) values (?, ?, ?)");
@@ -32,7 +33,7 @@ public class UserDao {
   }
 
   public User get(String id) throws ClassNotFoundException, SQLException {
-    Connection connection = connectionMaker.makeConnection();
+    Connection connection = datasource.getConnection();
 
     PreparedStatement preparedStatement = connection.prepareStatement(
         "select * from users where id = ?");
@@ -43,7 +44,7 @@ public class UserDao {
 
     User user = new User();
     user.setId(resultSet.getString("id"));
-    user.setName(resultSet.getString("name"));
+//    user.setName(resultSet.getString("name"));
     user.setPassword(resultSet.getString("password"));
 
     resultSet.close();
@@ -76,9 +77,14 @@ class UserDaoTest {
     System.out.println(user.getId() + " 등록 성공");
 
     User user2 = dao.get(user.getId());
-    System.out.println(user2.getName());
-    System.out.println(user2.getPassword());
-    System.out.println(user2.getId() + "조회 성공");
+    if (!user.getName().equals(user2.getName())) {
+      System.out.println("테스트 실패 (name)");
+    } else if (!user.getPassword().equals(user2.getPassword())) {
+      System.out.println("테스트 실패 (password)");
+    }
+    else {
+      System.out.println("조회 테스트 성공");
+    }
 
   }
 }
