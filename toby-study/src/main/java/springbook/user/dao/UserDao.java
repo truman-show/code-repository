@@ -52,4 +52,31 @@ public class UserDao {
     return user;
   }
 
+  public void deleteAll() throws SQLException {
+    Connection connection = datasource.getConnection();
+
+    PreparedStatement preparedStatement = connection.prepareStatement("delete from users");
+    preparedStatement.executeUpdate();
+
+    preparedStatement.close();
+    connection.close();
+
+  }
+
+  public int getCount() throws SQLException {
+    Connection connection = datasource.getConnection();
+
+    PreparedStatement preparedStatement = connection.prepareStatement("select count(*) from users");
+    ResultSet resultSet = preparedStatement.executeQuery();
+    resultSet.next();
+    int count = resultSet.getInt(1);
+
+    resultSet.close();
+    preparedStatement.close();
+    connection.close();
+
+    return count;
+  }
+
+
 }
