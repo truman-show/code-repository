@@ -14,18 +14,22 @@ import springbook.user.domain.User;
 public class UserDaoTest {
 
   private UserDao dao;  //setUp() 메소드에서 만드는 오브젝트를 테스트 메소드에서 사용할 수 있도록 인스턴스 변수로 선언한다.
+  private User user1;
+  private User user2;
+  private User user3;
 
   @Before // JUnit이 제공하는 애노테이션. @Test  메소드가 실행되기 전에 먼저 실행해야하는 메소드를 정의한다.
   public void setUp() {
     ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
     this.dao = context.getBean("userDao", UserDao.class);
+
+    this.user1 = new User("hello0", "world0", "hello world0");
+    this.user2 = new User("hello1", "world2", "hello world1");
+    this.user3 = new User("hello2", "world3", "hello world2");
   }
 
   @Test //JUnit에게 테스트용 메소드임을 알려준다.
-  public void addAndGet() throws SQLException, ClassNotFoundException { // JUnit 테스트 메소드는 반드시 public 으로 선언돼야 한다.
-    User user1 = new User("hello0", "world0", "hello world0");
-    User user2 = new User("hello1", "world1", "hello world1");
-
+  public void addAndGet() throws SQLException { // JUnit 테스트 메소드는 반드시 public 으로 선언돼야 한다.
     dao.deleteAll();
     assertThat(dao.getCount()).isSameAs(0);
 
@@ -44,10 +48,6 @@ public class UserDaoTest {
 
   @Test
   public void count() throws SQLException {
-    User user1 = new User("hello0", "world0", "hello world0");
-    User user2 = new User("hello1", "world2", "hello world1");
-    User user3 = new User("hello2", "world3", "hello world2");
-
     dao.deleteAll();
     assertThat(dao.getCount()).isSameAs(0);
 
