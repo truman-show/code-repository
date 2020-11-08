@@ -16,12 +16,14 @@ dependencies {
 
     implementation group: 'net.sourceforge.cglib', name: 'com.springsource.net.sf.cglib', version: '2.2.0'
     implementation group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
-    implementation group: 'org.springframework', name: 'spring-asm', version: '3.0.7.RELEASE'
-    implementation group: 'org.springframework', name: 'spring-beans', version: '3.0.7.RELEASE'
-    implementation group: 'org.springframework', name: 'spring-context', version: '3.0.7.RELEASE'
-    implementation group: 'org.springframework', name: 'spring-core', version: '3.0.7.RELEASE'
-    implementation group: 'org.springframework', name: 'spring-expression', version: '3.0.7.RELEASE'
-    implementation group: 'org.springframework', name: 'spring-jdbc', version: '3.0.7.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-asm', version: '3.1.4.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-beans', version: '3.1.4.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-context', version: '3.1.4.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-core', version: '3.1.4.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-expression', version: '3.1.4.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-jdbc', version: '3.1.4.RELEASE'
+
+    testImplementation group: 'org.springframework', name: 'spring-test', version: '3.1.4.RELEASE'
 
     testCompileOnly group: 'junit', name: 'junit', version: '4.12'
     testCompileOnly group: 'org.assertj', name: 'assertj-core', version: '3.18.0'
