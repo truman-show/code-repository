@@ -6,13 +6,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import springbook.user.domain.User;
 
+@RunWith(SpringJUnit4ClassRunner.class) // 스프링의 테스트 컨텍스트 프레임워크의 JUnit확장기능 지정
+@ContextConfiguration(classes = {DaoFactory.class})
 public class UserDaoTest {
 
+  @Autowired
+  private ApplicationContext context;
   private UserDao dao;  //setUp() 메소드에서 만드는 오브젝트를 테스트 메소드에서 사용할 수 있도록 인스턴스 변수로 선언한다.
   private User user1;
   private User user2;
@@ -20,7 +27,6 @@ public class UserDaoTest {
 
   @Before // JUnit이 제공하는 애노테이션. @Test  메소드가 실행되기 전에 먼저 실행해야하는 메소드를 정의한다.
   public void setUp() {
-    ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
     this.dao = context.getBean("userDao", UserDao.class);
 
     this.user1 = new User("hello0", "world0", "hello world0");
