@@ -10,7 +10,7 @@ import springbook.user.domain.User;
 
 public class UserDao {
 
-  private DataSource datasource;
+  private final DataSource datasource;
 
   public UserDao(DataSource datasource) {
     this.datasource = datasource;

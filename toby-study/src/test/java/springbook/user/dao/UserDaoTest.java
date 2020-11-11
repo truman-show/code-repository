@@ -19,7 +19,6 @@ import springbook.user.domain.User;
 public class UserDaoTest {
 
   @Autowired
-  private ApplicationContext context;
   private UserDao dao;  //setUp() 메소드에서 만드는 오브젝트를 테스트 메소드에서 사용할 수 있도록 인스턴스 변수로 선언한다.
   private User user1;
   private User user2;
@@ -27,11 +26,6 @@ public class UserDaoTest {
 
   @Before // JUnit이 제공하는 애노테이션. @Test  메소드가 실행되기 전에 먼저 실행해야하는 메소드를 정의한다.
   public void setUp() {
-    System.out.println("=====================");
-    System.out.println(this.context); // 동일한 애플리케이션 컨텍스트가 사용된다.
-    System.out.println(this);         // 테스트 메소드를 실행할 때마다 새로운 테스트 오브젝트를 만든다.
-    System.out.println("=====================");
-    this.dao = context.getBean("userDao", UserDao.class);
     this.user1 = new User("hello0", "world0", "hello world0");
     this.user2 = new User("hello1", "world2", "hello world1");
     this.user3 = new User("hello2", "world3", "hello world2");
