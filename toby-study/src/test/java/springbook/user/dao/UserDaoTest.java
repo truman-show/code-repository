@@ -4,20 +4,22 @@ package springbook.user.dao;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.SQLException;
+import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import springbook.user.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class) // 스프링의 테스트 컨텍스트 프레임워크의 JUnit확장기능 지정
 @ContextConfiguration(classes = {DaoFactory.class})
+@DirtiesContext // 테스트 메소드에서 애플리케이션 컨텍스트의 구성이나 상태를 변경한다는 것을 테스트 프레임워크에 알려준다.
 public class UserDaoTest {
 
-  @Autowired
   private UserDao dao;  //setUp() 메소드에서 만드는 오브젝트를 테스트 메소드에서 사용할 수 있도록 인스턴스 변수로 선언한다.
   private User user1;
   private User user2;
@@ -25,9 +27,11 @@ public class UserDaoTest {
 
   @Before // JUnit이 제공하는 애노테이션. @Test  메소드가 실행되기 전에 먼저 실행해야하는 메소드를 정의한다.
   public void setUp() {
-    System.out.println("==============userDaoTest");
     System.out.println(dao);
-    System.out.println("==============userDaoTest");
+
+    DataSource dataSource = new SingleConnectionDataSource(
+        "jdbc:h2:tcp://localhost/~/springbook", "sa", "", true);
+    dao = new UserDao(dataSource);
     this.user1 = new User("hello0", "world0", "hello world0");
     this.user2 = new User("hello1", "world2", "hello world1");
     this.user3 = new User("hello2", "world3", "hello world2");
