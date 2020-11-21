@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,6 +25,9 @@ public class UserDaoTest {
 
   @Before // JUnit이 제공하는 애노테이션. @Test  메소드가 실행되기 전에 먼저 실행해야하는 메소드를 정의한다.
   public void setUp() {
+    System.out.println("==============userDaoTest");
+    System.out.println(dao);
+    System.out.println("==============userDaoTest");
     this.user1 = new User("hello0", "world0", "hello world0");
     this.user2 = new User("hello1", "world2", "hello world1");
     this.user3 = new User("hello2", "world3", "hello world2");
