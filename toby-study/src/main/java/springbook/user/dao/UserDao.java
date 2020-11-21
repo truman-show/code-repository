@@ -16,6 +16,10 @@ public class UserDao {
     this.datasource = datasource;
   }
 
+  public DataSource getDatasource(){
+    return this.datasource;
+  }
+
   public void add(User user) throws SQLException {
     Connection connection = datasource.getConnection();
 
