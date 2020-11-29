@@ -16,7 +16,7 @@ public class UserDao {
     this.datasource = datasource;
   }
 
-  public DataSource getDatasource(){
+  public DataSource getDatasource() {
     return this.datasource;
   }
 
@@ -61,10 +61,31 @@ public class UserDao {
   }
 
   public void deleteAll() throws SQLException {
-    Connection connection = datasource.getConnection();
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-    PreparedStatement preparedStatement = connection.prepareStatement("delete from users");
-    preparedStatement.executeUpdate();
+
+    try {
+      // 예외가 발생할 가능성이 있는 코드를 모두 try 블록으로 묶어준다.
+      connection = datasource.getConnection();
+      preparedStatement = connection.prepareStatement("delete from users");
+      preparedStatement.executeUpdate();
+    } catch (SQLException e) {
+      throw e;
+    } finally {
+      if (preparedStatement != null) {
+        try {
+          preparedStatement.close();
+        } catch (SQLException e) {
+        }
+      }
+      if (connection != null) {
+        try {
+          connection.close();
+        } catch (SQLException e) {
+        }
+      }
+    }
 
     preparedStatement.close();
     connection.close();
@@ -72,18 +93,47 @@ public class UserDao {
   }
 
   public int getCount() throws SQLException {
-    Connection connection = datasource.getConnection();
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    PreparedStatement preparedStatement = connection.prepareStatement("select count(*) from users");
-    ResultSet resultSet = preparedStatement.executeQuery();
-    resultSet.next();
-    int count = resultSet.getInt(1);
+    try {
+      connection = datasource.getConnection();
+      preparedStatement = connection.prepareStatement("select count(*) from users");
+      resultSet = preparedStatement.executeQuery();
+      resultSet.next();
 
-    resultSet.close();
-    preparedStatement.close();
-    connection.close();
+      return resultSet.getInt(1);
 
-    return count;
+    } catch (SQLException e) {
+      throw e;
+    } finally {
+
+      if (resultSet != null) {
+        try {
+          resultSet.close();
+        } catch (SQLException throwables) {
+          throwables.printStackTrace();
+        }
+      }
+
+      if (preparedStatement != null) {
+        try {
+          preparedStatement.close();
+        } catch (SQLException throwables) {
+          throwables.printStackTrace();
+        }
+      }
+
+      if (connection != null) {
+        try {
+          connection.close();
+        } catch (SQLException throwables) {
+          throwables.printStackTrace();
+        }
+      }
+    }
+
   }
 
 
