@@ -1,4 +1,4 @@
-package com.truman.show.config;
+package com.truman.show;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
