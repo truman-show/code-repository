@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
 @Configuration
-public class DaoFactoryForTest {
+public class TestApplicationContext {
 
   @Bean
   public UserDao userDao() {

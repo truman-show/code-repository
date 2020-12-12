@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import springbook.user.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class) // 스프링의 테스트 컨텍스트 프레임워크의 JUnit확장기능 지정
-@ContextConfiguration(classes = {DaoFactoryForTest.class})
+@ContextConfiguration(classes = {TestApplicationContext.class})
 public class UserDaoTest {
 
   @Autowired

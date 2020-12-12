@@ -14,13 +14,30 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 
-@EnableKafka
+/**
+ * @KafkaListener Annotation 를 자세히 설명하고 있다.
+ * https://docs.spring.io/spring-kafka/reference/html/#kafka-listener-annotation
+ */
+@EnableKafka  //@KafkaListener 를 사용하려면 필
 @Configuration
 public class KafkaConsumerConfig {
 
 
   @Value("${spring.kafka.bootstrap-servers}")
   private String bootstrapServers;
+
+  // kafkaListenerContainerFactory -> consumerFactory -> consumerConfigs
+
+  // @KafkaListener 주석은 간단한 POJO 리스너를위한 메커니즘을 제공합니다.
+  // 이 메커니즘에는 기본 ConcurrentMessageListenerContainer를 구성하는 데 사용되는 리스너 컨테이너 팩토리가 필요합니다.
+  // 기본적으로 이름이 kafkaListenerContainerFactory 인 Bean이 필요합니다.
+  @Bean
+  public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory() {
+    ConcurrentKafkaListenerContainerFactory<String, String> factory =
+        new ConcurrentKafkaListenerContainerFactory<>();
+    factory.setConsumerFactory(consumerFactory());
+    return factory;
+  }
 
   @Bean
   public Map<String, Object> consumerConfigs() {
@@ -38,11 +55,4 @@ public class KafkaConsumerConfig {
     return new DefaultKafkaConsumerFactory<>(consumerConfigs());
   }
 
-  @Bean
-  public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory() {
-    ConcurrentKafkaListenerContainerFactory<String, String> factory =
-        new ConcurrentKafkaListenerContainerFactory<>();
-    factory.setConsumerFactory(consumerFactory());
-    return factory;
-  }
 }
