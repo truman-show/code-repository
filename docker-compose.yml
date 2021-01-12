@@ -1,5 +1,21 @@
-version: '2'
+version: '3.6'
 services:
+  mysql:
+    container_name: member-mysql
+    image: mysql:5.7.31
+    restart: always
+    volumes:
+      - ${MYSQL_VOLUME}:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: member
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_password
+    ports:
+      - 3306:3306
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
   zookeeper:
     image: wurstmeister/zookeeper # https://hub.docker.com/r/wurstmeister/zookeeper
     ports:
@@ -12,6 +28,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181 #Zookeeper 정보
       KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1 #호스트
       KAFKA_ADVERTISED_HOST_PORT: 9092  # 포트번호
-      KAFKA_CREATE_TOPICS: "test:1:1"   #Topic명:Partition개수:Replica개수
+#      KAFKA_CREATE_TOPICS: "test:1:1"   #Topic명:Partition개수:Replica개수
+      KAFKA_CREATE_TOPICS: "LOCAL-SERVICE_LOG-BATCH_TRACKING:1:1"   #Topic명:Partition개수:Replica개수
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
