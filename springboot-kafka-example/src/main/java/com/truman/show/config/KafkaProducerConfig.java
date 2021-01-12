@@ -17,8 +17,12 @@ public class KafkaProducerConfig {
   @Value("${spring.kafka.bootstrap-servers}")
   private String bootstrapServers;
 
+  @Value("#{environment.getActiveProfiles()[0]}")
+  private String valueTest;
+
   @Bean
   public Map<String, Object> producerConfigs() {
+    System.out.println("valueTest" + valueTest);
     Map<String, Object> props = new HashMap<>();
     //Kafka가 실행중인 호스트 및 포트입니다.
     props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);

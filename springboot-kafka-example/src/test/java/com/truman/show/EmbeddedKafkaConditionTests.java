@@ -59,9 +59,9 @@ public class EmbeddedKafkaConditionTests {
     // KafkaTestUtils 는 AUTO_OFFSET_RESET_CONFIG 기본값으로 `earliest` 를 사용한다.
     // KafkaTestUtils 클래스는 프로듀서, 컨슈머 속성을 설정하는 몇가지 정적 메서드를 제공한다.
 
-    // 컨슈머에 대한 테스트 속성을 설정합니다.
+    // 1. 컨슈머에 대한 테스트 속성을 설정합니다.
     Map<String, Object> consumerProps = KafkaTestUtils.consumerProps(
-        "testT", "false", embeddedKafka);
+        "myGroup", "false", embeddedKafka);
 
     // DefaultKafkaConsumerFactory 객체를 생성한다 (KafkaConsumerConfig 클래스의 consumerFactory 빈)
     DefaultKafkaConsumerFactory<Integer, String> defaultKafkaConsumerFactory
@@ -95,7 +95,9 @@ public class EmbeddedKafkaConditionTests {
     System.out.println("embeddedKafka.getPartitionsPerTopic() : " + embeddedKafka.getPartitionsPerTopic());
     ContainerTestUtils.waitForAssignment(container, embeddedKafka.getPartitionsPerTopic());
 
-    // 프로듀서에 대한 테스트 속성을 설정합니다.
+
+
+    // 2. 프로듀서에 대한 테스트 속성을 설정합니다.
     Map<String, Object> producerProps = KafkaTestUtils.producerProps(embeddedKafka);
     DefaultKafkaProducerFactory<Integer, String> integerStringDefaultKafkaProducerFactory =
         new DefaultKafkaProducerFactory<>(producerProps);
