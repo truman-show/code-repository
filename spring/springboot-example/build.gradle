@@ -15,6 +15,10 @@ ext {
     lombokVersion = "1.18.12"
 }
 
+wrapper{
+    gradleVersion='6.7.1'
+}
+
 
 repositories {
     mavenCentral()
