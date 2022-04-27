@@ -3,13 +3,16 @@ package com.bootcamp
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.context.ApplicationContext
+import org.springframework.core.env.Environment
 import javax.annotation.PostConstruct
 
 @SpringBootApplication
-class KotlinSpringBootcampApplication {
-
-    @Value("\${my.height}")
-    lateinit var height: String
+class KotlinSpringBootcampApplication(
+    @Value("\${my.height}") var height: String,
+    var enviroment: Environment,
+    var applicationContext: ApplicationContext
+) {
 
     // companion(동반자) 객체
     // KotlinSpringBootcampApplication.Companion.main 과 KotlinSpringBootcampApplication.main 같다
@@ -26,6 +29,8 @@ class KotlinSpringBootcampApplication {
     // height 값이 주입된 후 실행되는것을 확인 할 수 있다.
     fun init() {
         println("height!! : $height")
+        println("Enviroment!! : ${enviroment.getProperty("my.height")}")
+        println("ApplicationContext!! : ${applicationContext.environment.getProperty("my.height")}")
     }
 
 }
