@@ -12,9 +12,9 @@ import javax.annotation.PostConstruct
 @SpringBootApplication
 @ConfigurationPropertiesScan
 class KotlinSpringBootcampApplication(
-    @Value("\${my.height}") var height: String,
-    var enviroment: Environment,
-    var applicationContext: ApplicationContext,
+    @Value("\${my.height}") val height: String,
+    val enviroment: Environment,
+    val applicationContext: ApplicationContext,
     val myProperties: MyProperties
 ) {
 
@@ -33,6 +33,7 @@ class KotlinSpringBootcampApplication(
     // height 값이 주입된 후 실행되는것을 확인 할 수 있다.
     fun init() {
 
+        println("TestConfig : ${applicationContext.getBean("testConfig")}")
         println("=========")
         println("height!! : $height")
         println("Enviroment!! : ${enviroment.getProperty("my.height")}")
