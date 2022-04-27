@@ -1,11 +1,31 @@
 package com.bootcamp
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import javax.annotation.PostConstruct
 
 @SpringBootApplication
-class KotlinSpringBootcampApplication
+class KotlinSpringBootcampApplication {
 
-fun main(args: Array<String>) {
-    runApplication<KotlinSpringBootcampApplication>(*args)
+    @Value("\${my.height}")
+    lateinit var height: String
+
+    // companion(동반자) 객체
+    // KotlinSpringBootcampApplication.Companion.main 과 KotlinSpringBootcampApplication.main 같다
+    // https://www.bsidesoft.com/8187
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            runApplication<KotlinSpringBootcampApplication>(*args)
+        }
+    }
+
+    @PostConstruct
+    // 초기화 수행을 위해 종속성 주입이 완료 된 후 실행 되는 메서드에 사용하는 애노테이션
+    // height 값이 주입된 후 실행되는것을 확인 할 수 있다.
+    fun init() {
+        println("height!! : $height")
+    }
+
 }
