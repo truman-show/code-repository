@@ -10,6 +10,9 @@ plugins {
 group = "com.bootcamp"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
+object Version {
+    const val testcontainersVersion = "1.15.3"
+}
 
 repositories {
     mavenCentral()
@@ -20,11 +23,21 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    testImplementation("org.testcontainers:mariadb")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testRuntimeOnly("org.mariadb.jdbc:mariadb-java-client")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     dependencies {
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     }
+}
 
+dependencyManagement {
+    imports {
+        mavenBom("org.testcontainers:testcontainers-bom:${Version.testcontainersVersion}")
+    }
 }
 
 tasks.withType<KotlinCompile> {
