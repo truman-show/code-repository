@@ -3,7 +3,7 @@ package com.example.getinline.exception
 import com.example.getinline.constant.ErrorCode
 
 class GeneralException : RuntimeException {
-    private val errorCode: ErrorCode
+    val errorCode: ErrorCode
 
     constructor() : super(ErrorCode.INTERNAL_ERROR.message) {
         errorCode = ErrorCode.INTERNAL_ERROR
