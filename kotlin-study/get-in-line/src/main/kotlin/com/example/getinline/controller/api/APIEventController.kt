@@ -1,5 +1,7 @@
 package com.example.getinline.controller.api
 
+import com.example.getinline.exception.GeneralException
+import org.springframework.web.HttpRequestMethodNotSupportedException
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -8,7 +10,8 @@ class APIEventController {
 
     @GetMapping("/events")
     fun getEvents(): List<String>? {
-        return listOf("event1", "event2")
+        throw HttpRequestMethodNotSupportedException("스프링 예외 테스트")
+//        return listOf("event1", "event2")
     }
 
     @PostMapping("/events")
@@ -18,7 +21,8 @@ class APIEventController {
 
     @GetMapping("/events/{eventId}")
     fun getEvent(@PathVariable eventId: Int): String? {
-        return "event $eventId"
+        throw GeneralException("General 예외 테스트 ")
+//        return "event $eventId"
     }
 
     @PutMapping("/events/{eventId}")
