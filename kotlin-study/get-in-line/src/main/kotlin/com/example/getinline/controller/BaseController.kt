@@ -8,7 +8,7 @@ class BaseController {
 
     @GetMapping("/")
     fun root(): String {
-        throw Exception("Error Test")
+        return "index"
     }
 
 }
