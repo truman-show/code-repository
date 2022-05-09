@@ -9,6 +9,6 @@ fun parsePath(path: String) {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     parsePath("/Users/yole/kotlin-book/chapter.adoc")
 }

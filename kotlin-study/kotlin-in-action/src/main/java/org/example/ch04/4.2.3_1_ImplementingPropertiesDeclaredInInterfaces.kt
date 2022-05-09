@@ -16,7 +16,7 @@ class FacebookUser(val accountId: Int) : User {
     override val nickname = getFacebookName(accountId)
 }
 
-fun main(args: Array<String>) {
+fun main() {
     println(PrivateUser("test@kotlinlang.org").nickname)
     println(SubscribingUser("test@kotlinlang.org").nickname)
 }

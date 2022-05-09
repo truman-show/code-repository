@@ -11,6 +11,6 @@ fun eval(e: Expr): Int =
         is Expr.Sum -> eval(e.right) + eval(e.left)
     }
 
-fun main(args: Array<String>) {
+fun main() {
     println(eval(Expr.Sum(Expr.Sum(Expr.Num(1), Expr.Num(2)), Expr.Num(4))))
 }

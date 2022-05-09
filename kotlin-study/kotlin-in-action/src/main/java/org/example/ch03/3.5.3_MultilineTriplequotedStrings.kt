@@ -4,6 +4,6 @@ val kotlinLogo = """| //
                    .|//
                    .|/ \"""
 
-fun main(args: Array<String>) {
+fun main() {
     println(kotlinLogo.trimMargin("."))
 }
