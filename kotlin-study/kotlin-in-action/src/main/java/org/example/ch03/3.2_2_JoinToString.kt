@@ -1,4 +1,4 @@
-package ch03.JoinToString
+package org.example.ch03
 
 fun <T> joinToString(
         collection: Collection<T>,
@@ -10,6 +10,10 @@ fun <T> joinToString(
     val result = StringBuilder(prefix)
 
     for ((index, element) in collection.withIndex()) {
+        println("-----------------------")
+        println("index : $index")
+        println("element : $element")
+        println("-----------------------")
         if (index > 0) result.append(separator)
         result.append(element)
     }
