@@ -6,6 +6,8 @@ import org.example.anki.View
 import org.junit.runner.manipulation.Ordering
 
 class MyButton521 : View {  // 클래스 헤더에 있는 클래스 이름뒤에 괄호가 없다.
+//    val ctx2: Ordering.Context? = null
+
     constructor(ctx: Ordering.Context) : super(ctx) {  // 상위 클래스의 생성자를 호출한다.
     }
 }
