@@ -1,6 +1,11 @@
 package com.example.getinline.dto
 
-class APIDataResponse(success: Boolean, errorCode: Int, message: String, data: Any) :
+class APIDataResponse(
+    success: Boolean,
+    errorCode: Int,
+    message: String,
+    data: Any
+) :
     APIErrorResponse(
         success,
         errorCode,
@@ -13,20 +18,4 @@ class APIDataResponse(success: Boolean, errorCode: Int, message: String, data: A
             return APIDataResponse(success, errorCode, message, data)
         }
     }
-
 }
-
-
-/*
-
-
-class MyButton : View {
-    constructor(ctx: Context) : this(ctx, MY_STYLE) {
-        //..
-    }
-
-    constructor(ctx: Context, attr: AttributeSet) : super(ctx, attr) {
-        //...
-    }
-}
-*/
