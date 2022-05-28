@@ -13,13 +13,13 @@ enum class ErrorCode(
     SPRING_INTERNAL_ERROR(20001, ErrorCategory.SERVER_SIDE, "Spring-detected internal error")
     ;
 
-    fun message(e: Exception): String {
-        return this.message(e.message)
-    }
+    fun message(e: Exception): String = this.message(e.message)
 
-    fun message(message: String?): String {
-        return if (message.isNullOrEmpty()) this.message else message
-    }
+    fun message(message: String?): String = if (message.isNullOrEmpty()) this.message else message
+
+    fun isClientSideError(): Boolean = this.errorCategory == ErrorCategory.CLIENT_SIDE
+
+    fun isServerSideError(): Boolean = this.errorCategory == ErrorCategory.SERVER_SIDE
 
     enum class ErrorCategory {
         NOMAL, CLIENT_SIDE, SERVER_SIDE
