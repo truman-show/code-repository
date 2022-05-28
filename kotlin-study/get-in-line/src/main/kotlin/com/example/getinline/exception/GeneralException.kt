@@ -4,7 +4,7 @@ import com.example.getinline.constant.ErrorCode
 
 class GeneralException : RuntimeException {
 
-    private var errorCode: ErrorCode
+    var errorCode: ErrorCode
 
     constructor() : super() {
         this.errorCode = ErrorCode.INTERNAL_ERROR
@@ -36,7 +36,7 @@ class GeneralException : RuntimeException {
     ) : super(errorCode.message) {
         this.errorCode = errorCode
     }
-    
+
     constructor (
         errorCode: ErrorCode, cause: Throwable?
     ) : super(errorCode.message, cause) {
