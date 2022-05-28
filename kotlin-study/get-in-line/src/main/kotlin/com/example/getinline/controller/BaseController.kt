@@ -8,7 +8,8 @@ class BaseController {
 
     @GetMapping("/")
     fun root(): String {
-        return "index"
+        throw Exception("테스트")
+//        return "index"
     }
 
 }
