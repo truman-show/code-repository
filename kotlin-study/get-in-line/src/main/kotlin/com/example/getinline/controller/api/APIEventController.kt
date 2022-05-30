@@ -5,6 +5,7 @@ import com.example.getinline.dto.APIErrorResponse.Companion.of
 import com.example.getinline.exception.GeneralException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.HttpRequestMethodNotSupportedException
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -13,7 +14,10 @@ class APIEventController {
 
     @GetMapping("/events")
     fun getEvents(): List<String>? {
-        throw GeneralException("테스트 메세지")
+//        throw GeneralException("테스트 메세지")
+        throw HttpRequestMethodNotSupportedException(
+            "GET"
+        )
 //        return listOf("event1", "event2")
     }
 
