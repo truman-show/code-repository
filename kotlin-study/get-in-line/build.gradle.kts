@@ -15,6 +15,12 @@ repositories {
     mavenCentral()
 }
 
+
+object Version {
+    const val KOTEST = "5.3.0"
+    const val KOTEST_EXTENSION_SPRING = "1.1.0"
+}
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -24,6 +30,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("io.kotest:kotest-runner-junit5:${Version.KOTEST}")
+    testImplementation("io.kotest:kotest-assertions-core:${Version.KOTEST}")
+    testImplementation(
+        "io.kotest.extensions:kotest-extensions-spring:${Version.KOTEST_EXTENSION_SPRING}"
+    )
 }
 
 tasks.withType<KotlinCompile> {
@@ -33,6 +44,6 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.withType<Test> {
+tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
