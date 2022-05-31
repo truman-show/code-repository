@@ -1,31 +1,35 @@
 package com.example.getinline.controller
 
+import io.kotest.core.spec.style.FunSpec
 import org.hamcrest.CoreMatchers
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
-@SpringBootTest
-@AutoConfigureMockMvc
-class BaseControllerTest {
-
-    @Autowired
-    lateinit var mockMvc: MockMvc
+@WebMvcTest(BaseController::class)
+class BaseControllerTest(
+    @Autowired val mockMvc: MockMvc
+) : FunSpec() {
 
     @Test
-    fun `VIEW, GET 기본페이지 요청`() {
-        mockMvc.perform(get("/"))
-            .andExpect(status().isOk)
-            .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-            .andExpect(content().string(CoreMatchers.containsString("This is default Page.")))
-            .andExpect(view().name("index"))
+    @DisplayName("[view][GET] 기본 페이지 요청")
+    fun test() {
+        mockMvc.perform(MockMvcRequestBuilders.get("/"))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(
+                MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML)
+            )
+            .andExpect(
+                MockMvcResultMatchers.content()
+                    .string(CoreMatchers.containsString("This is default Page."))
+            )
+            .andExpect(MockMvcResultMatchers.view().name("index"))
             .andDo(MockMvcResultHandlers.print())
     }
-
 }
