@@ -24,9 +24,9 @@ class APIExceptionHandler {
                 APIErrorResponse.of(false, errorCode, errorCode.message(e))
             )
     }
-    
+
     @ExceptionHandler
-    fun exception(e: GeneralException): ResponseEntity<APIErrorResponse> {
+    fun exception(e: Exception): ResponseEntity<APIErrorResponse> {
         val errorCode = ErrorCode.INTERNAL_ERROR
         val status = HttpStatus.INTERNAL_SERVER_ERROR
 
