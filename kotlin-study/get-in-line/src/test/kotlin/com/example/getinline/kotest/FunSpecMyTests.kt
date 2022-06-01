@@ -3,7 +3,7 @@ package com.example.getinline.kotest
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
-class MyTests : FunSpec({
+class FunSpecMyTests : FunSpec({
 
     test("String length should return the length of the string") {
         "sammy".length shouldBe 5
