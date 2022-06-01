@@ -1,4 +1,4 @@
-package com.example.getinline.dto
+package com.example.getinline.response
 
 import com.example.getinline.constant.ErrorCode
 

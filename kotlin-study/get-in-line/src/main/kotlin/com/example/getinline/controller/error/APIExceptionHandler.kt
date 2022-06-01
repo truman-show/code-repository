@@ -1,8 +1,8 @@
 package com.example.getinline.controller.error
 
 import com.example.getinline.constant.ErrorCode
-import com.example.getinline.dto.APIErrorResponse
 import com.example.getinline.exception.GeneralException
+import com.example.getinline.response.APIErrorResponse
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

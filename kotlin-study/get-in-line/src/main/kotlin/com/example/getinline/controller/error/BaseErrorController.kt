@@ -1,7 +1,7 @@
 package com.example.getinline.controller.error
 
 import com.example.getinline.constant.ErrorCode
-import com.example.getinline.dto.APIErrorResponse
+import com.example.getinline.response.APIErrorResponse
 import org.springframework.boot.web.servlet.error.ErrorController
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType

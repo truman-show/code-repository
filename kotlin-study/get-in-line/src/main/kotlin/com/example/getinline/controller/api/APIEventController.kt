@@ -1,8 +1,8 @@
 package com.example.getinline.controller.api
 
-import com.example.getinline.dto.APIErrorResponse
-import com.example.getinline.dto.APIErrorResponse.Companion.of
 import com.example.getinline.exception.GeneralException
+import com.example.getinline.response.APIErrorResponse
+import com.example.getinline.response.APIErrorResponse.Companion.of
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.HttpRequestMethodNotSupportedException
