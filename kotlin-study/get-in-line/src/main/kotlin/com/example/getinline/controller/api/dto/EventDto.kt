@@ -4,46 +4,73 @@ import com.example.getinline.constant.EventStatus
 import java.time.LocalDateTime
 
 class EventDto(
-    val id: Long,
-    val placeDto: PlaceDto,
-    val eventName: String,
-    val eventStatus: EventStatus,
-    val eventStartDatetime: LocalDateTime,
-    val eventEndDatetime: LocalDateTime,
-    val currentNumberOfPeople: Int,
-    val capacity: Int,
-    val memo: String,
-    val createdAt: LocalDateTime,
-    val modifiedAt: LocalDateTime
+    val id: Long?,
+    val place: PlaceDto?,
+    val eventName: String?,
+    val eventStatus: EventStatus?,
+    val eventStartDatetime: LocalDateTime?,
+    val eventEndDatetime: LocalDateTime?,
+    val currentNumberOfPeople: Int?,
+    val capacity: Int?,
+    val memo: String?
 ) {
 
-    companion object {
-        fun of(
-            id: Long,
-            placeDto: PlaceDto,
-            eventName: String,
-            eventStatus: EventStatus,
-            eventStartDatetime: LocalDateTime,
-            eventEndDatetime: LocalDateTime,
-            currentNumberOfPeople: Int,
-            capacity: Int,
-            memo: String,
-            createdAt: LocalDateTime,
-            modifiedAt: LocalDateTime
-        ): EventDto {
-            return EventDto(
-                id,
-                placeDto,
-                eventName,
-                eventStatus,
-                eventStartDatetime,
-                eventEndDatetime,
-                currentNumberOfPeople,
-                capacity,
-                memo,
-                createdAt,
-                modifiedAt
-            )
+    data class EventResponse(
+        val id: Long?,
+        val place: PlaceDto?,
+        val eventName: String?,
+        val eventStatus: EventStatus?,
+        val eventStartDatetime: LocalDateTime?,
+        val eventEndDatetime: LocalDateTime?,
+        val currentNumberOfPeople: Int?,
+        val capacity: Int?,
+        val memo: String?,
+    ) {
+        companion object {
+
+            private fun of(
+                id: Long?,
+                place: PlaceDto?,
+                eventName: String?,
+                eventStatus: EventStatus?,
+                eventStartDatetime: LocalDateTime?,
+                eventEndDatetime: LocalDateTime?,
+                currentNumberOfPeople: Int?,
+                capacity: Int?,
+                memo: String?
+            ): EventResponse {
+                return EventResponse(
+                    id,
+                    place,
+                    eventName,
+                    eventStatus,
+                    eventStartDatetime,
+                    eventEndDatetime,
+                    currentNumberOfPeople,
+                    capacity,
+                    memo
+                )
+            }
+
+            fun from(eventDto: EventDto): EventResponse {
+                return of(
+                    eventDto.id,
+                    eventDto.place,
+                    eventDto.eventName,
+                    eventDto.eventStatus,
+                    eventDto.eventStartDatetime,
+                    eventDto.eventEndDatetime,
+                    eventDto.currentNumberOfPeople,
+                    eventDto.capacity,
+                    eventDto.memo
+                )
+            }
+
+            fun empty(placeDto: PlaceDto?): EventResponse? {
+                return of(null, placeDto, null, null, null, null, null, null, null)
+            }
+
         }
     }
+
 }
