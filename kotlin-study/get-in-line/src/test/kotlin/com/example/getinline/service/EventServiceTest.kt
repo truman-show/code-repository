@@ -1,26 +1,33 @@
 package com.example.getinline.service
 
 import com.example.getinline.controller.api.dto.EventDto
+import com.example.getinline.repository.EventRepository
+import com.ninjasquad.springmockk.MockkBean
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import org.springframework.test.context.ContextConfiguration
 
-@ContextConfiguration(classes = [(EventService::class)])
-class EventServiceTest(eventService: EventService) : DescribeSpec({
+@ContextConfiguration(classes = [EventService::class, EventRepository::class])
+class EventServiceTest(
+    private val eventService: EventService,
+    @MockkBean(relaxed = true) private val eventRepository: EventRepository
+) : DescribeSpec() {
 
-    fun subject(): List<EventDto> {
-        return eventService.findEvents(
-            null, null, null, null, null
-        )
-    }
+    init {
+        fun subject(): List<EventDto> {
+            return eventService.findEvents(
+                null, null, null, null, null
+            )
+        }
 
-    describe("findEvents 메소드는") {
-        context("조건이 주어지면") {
-            val subject = subject()
-            it("이벤트 목록을 리턴한다") {
-                subject shouldBe listOf(1, 2, 3)
+        describe("findEvents 메소드는") {
+            context("이벤트를 검색하면") {
+                val subject = subject()
+                it("이벤트 결과를 출력하여 보여준다.") {
+                    subject shouldBe listOf()
+                }
             }
         }
     }
 
-})
+}
