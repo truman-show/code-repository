@@ -1,14 +1,12 @@
 package com.example.getinline
 
-import org.junit.jupiter.api.Test
+import io.kotest.core.spec.style.FunSpec
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class GetInLineApplicationTests {
+class GetInLineApplicationTests : FunSpec({
 
-    @Test
-    fun contextLoads() {
-        println("hello, world")
+    test("GetInLineApplicationTests") {
+
     }
-
-}
+})
