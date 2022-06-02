@@ -23,4 +23,8 @@ open class APIErrorResponse(val success: Boolean, val errorCode: Int, val messag
         }
     }
 
+    override fun toString(): String {
+        return "APIErrorResponse(success=$success, errorCode=$errorCode, message='$message')"
+    }
+
 }
