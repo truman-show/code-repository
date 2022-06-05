@@ -2,14 +2,9 @@ package com.example.getinline.controller.api
 
 import com.example.getinline.constant.EventStatus
 import com.example.getinline.controller.api.dto.EventDto
-import com.example.getinline.exception.GeneralException
 import com.example.getinline.response.APIDataResponse
-import com.example.getinline.response.APIErrorResponse
-import com.example.getinline.response.APIErrorResponse.Companion.of
 import com.example.getinline.service.EventService
 import org.springframework.format.annotation.DateTimeFormat
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
 import kotlin.streams.toList
@@ -57,20 +52,6 @@ class APIEventController(private val eventService: EventService) {
     @DeleteMapping("/events/{eventId}")
     fun removeEvent(@PathVariable eventId: Int?): Boolean? {
         return true
-    }
-
-    // APIEventController 의 핸들러 메소드들 중에서 GeneralException 예외가 발생했을 때 예외를 잡아 후처리를 한다
-    @ExceptionHandler
-    fun general(e: GeneralException): ResponseEntity<APIErrorResponse> {
-        val errorCode = e.errorCode
-        val status =
-            if (errorCode.isClientSideError()) HttpStatus.BAD_REQUEST else HttpStatus.INTERNAL_SERVER_ERROR
-
-        return ResponseEntity
-            .status(status)
-            .body(
-                of(false, errorCode, errorCode.message(e))
-            )
     }
 
 }
