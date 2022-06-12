@@ -2,7 +2,7 @@ package com.example.getinline.controller.api.dto
 
 import com.example.getinline.constant.PlaceType
 
-class PlaceDto {
+class PlaceDto(val placeId: Int) {
 
     data class PlaceResponseDto(
         val id: Long,

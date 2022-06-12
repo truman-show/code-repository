@@ -20,15 +20,16 @@ class APIEventController(private val eventService: EventService) {
         eventStatus: EventStatus,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) eventStartDatetime: LocalDateTime,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) eventEndDatetime: LocalDateTime
-    ): APIDataResponse<List<EventDto.EventResponse>> {
+    ): APIDataResponse<List<EventDto.EventResponse?>> {
 
-        val eventResponses: List<EventDto.EventResponse> = eventService.findEvents(
+        val eventResponses: List<EventDto.EventResponse?> = eventService.findEvents(
             placeId,
             eventName,
             eventStatus,
             eventStartDatetime,
             eventEndDatetime
-        ).stream().map(EventDto.EventResponse::from).toList()
+        ).stream().map(EventDto.EventResponse::from)
+            .toList()
 
         return APIDataResponse.of(eventResponses)
 
