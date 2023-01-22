@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.0.1"
-    id("io.spring.dependency-management") version "1.1.0"
+    id("org.springframework.boot") version "2.7.1"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.7.22"
-    kotlin("plugin.spring") version "1.7.22"
+    kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.7.22"
 }
 
@@ -23,9 +23,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     runtimeOnly("com.h2database:h2")
-    runtimeOnly("com.mysql:mysql-connector-j")
+//    runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.batch:spring-batch-test")
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
 }
 
 tasks.withType<KotlinCompile> {
