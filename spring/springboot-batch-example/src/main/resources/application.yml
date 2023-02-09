@@ -1,0 +1,12 @@
+spring:
+  batch:
+    job:
+      names: ${job.name:NONE}
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/fortune?allowPublicKeyRetrieval=true&useSSL=false
+    username: foresh_user
+    password: foresh_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
